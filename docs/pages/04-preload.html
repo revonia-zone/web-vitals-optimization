@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title></title>
+  <style>
+  html, body, main {
+    height: 100%;
+    margin: 0;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  iframe {
+    flex-grow: 1;
+  }
+  </style>
+</head>
+<body>
+<main>
+  <button onclick="location.href = '/web-vitals-optimization/'">返回首页</button>
+  <iframe src="preload.html"></iframe>
+  <p>
+    这个页面的使用了一个很慢的外联 js （延迟 3000ms），js 中又请求了两个很慢的接口（延迟 2000ms）来渲染，这样 LCP 可能变得很大，庆幸的是，我们可以使用 preload 将请求提前。
+  </p>
+</main>
+</body>
+</html>

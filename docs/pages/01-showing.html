@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FCP Example</title>
+  <style>
+  html, body, main {
+    height: 100%;
+    margin: 0;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  iframe {
+    flex-grow: 1;
+  }
+  </style>
+</head>
+<body>
+<main>
+  <button onclick="location.href = '/web-vitals-optimization/'">返回首页</button>
+  <iframe src="showing.html?type=skeleton"></iframe>
+  <iframe src="showing.html?type=header"></iframe>
+  <iframe src="showing.html?type=text"></iframe>
+</main>
+</body>
+</html>

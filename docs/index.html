@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Title</title>
+  <style>
+  .chapters {
+    font-size: 18px;
+  }
+
+  .chapters li {
+    margin-bottom: 1em;
+  }
+  </style>
+</head>
+<body>
+
+<h1>如何做性能优化</h1>
+<ol class="chapters">
+  <li>
+    <a href="pages/01-showing.html">三种首屏内容</a>
+  </li>
+  <li>
+    <a href="pages/02-timing.html">FCP、LCP 时间叠加分析</a>
+  </li>
+  <li>
+    <a href="pages/03-lazyload.html">懒加载</a>
+  </li>
+  <li>
+    <a href="pages/04-preload.html">预加载</a>
+  </li>
+  <li>
+    <a href="pages/05-swr.html">SWR 策略</a>
+  </li>
+  <li>
+    <a href="pages/06-cls.html">CLS 帮助我们评估页面体验</a>
+  </li>
+  <li>
+    <a href="https://github.com/revonia-zone/web-vitals-optimization">到 GitHub 查看源码并 Star!</a>
+  </li>
+</ol>
+
+<p>
+  该站点使用 Service Worker 消除网络请求影响、实现请求延迟，初次加载可能缓慢，如遇到问题，请
+  <button id="refresh">
+    刷新 Service Worker 缓存
+  </button>
+</p>
+
+<script>
+
+(async () => {
+  if (!navigator.serviceWorker) {
+    alert('你的浏览器不支持 Service Worker，不能正常使用该站点')
+    return
+  }
+  const sw = await navigator.serviceWorker.register('/web-vitals-optimization/service-worker.js', { scope: '/web-vitals-optimization/' })
+
+  document.getElementById('refresh').addEventListener('click', () => {
+    sw.active.postMessage({type: 'refresh'})
+  })
+})()
+</script>
+<script src="web-vitals-widget.js" async defer></script>
+</body>
+</html>

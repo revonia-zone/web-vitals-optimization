@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title></title>
+  <style>
+  html, body, main {
+    height: 100%;
+    margin: 0;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  iframe {
+    flex-grow: 1;
+  }
+  </style>
+</head>
+<body>
+<main>
+  <button onclick="location.href = '/web-vitals-optimization/'">返回首页</button>
+  <iframe src="lazyload-js.html"></iframe>
+  <iframe src="lazyload-img.html"></iframe>
+  <p>
+    上下两个页面使用不同的图片懒加载方式，更加推荐使用浏览器级别的懒加载，会根据设备网络情况自动地决定懒加载多少内容。在使用 js 懒加载时特别注意，不要懒加载首图，很可能让 LCP 变大
+  </p>
+</main>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title></title>
+  <style>
+  html, body, main {
+    height: 100%;
+    margin: 0;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  section {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  /* CSS */
+  .button-82-pushable {
+    position: relative;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    outline-offset: 4px;
+    transition: filter 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+
+  .button-82-shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: hsl(0deg 0% 0% / 0.25);
+    will-change: transform;
+    transform: translateY(2px);
+    transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+  }
+
+  .button-82-edge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: linear-gradient(
+        to left,
+        hsl(340deg 100% 16%) 0%,
+        hsl(340deg 100% 32%) 8%,
+        hsl(340deg 100% 32%) 92%,
+        hsl(340deg 100% 16%) 100%
+    );
+  }
+
+  .button-82-front {
+    display: block;
+    position: relative;
+    padding: 12px 27px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    color: white;
+    background: hsl(345deg 100% 47%);
+    will-change: transform;
+    transform: translateY(-4px);
+    transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+  }
+
+  @media (min-width: 768px) {
+    .button-82-front {
+      font-size: 1.25rem;
+      padding: 12px 42px;
+    }
+  }
+
+  .button-82-pushable:hover {
+    filter: brightness(110%);
+    -webkit-filter: brightness(110%);
+  }
+
+  .button-82-pushable:hover .button-82-front {
+    transform: translateY(-6px);
+    transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+  }
+
+  .button-82-pushable:active .button-82-front {
+    transform: translateY(-2px);
+    transition: transform 34ms;
+  }
+
+  .button-82-pushable:hover .button-82-shadow {
+    transform: translateY(4px);
+    transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+  }
+
+  .button-82-pushable:active .button-82-shadow {
+    transform: translateY(1px);
+    transition: transform 34ms;
+  }
+
+  .button-82-pushable:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  .button-36 {
+    background-image: linear-gradient(92.88deg, #455EB5 9.16%, #5643CC 43.89%, #673FD7 64.72%);
+    border-radius: 8px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    flex-shrink: 0;
+    font-family: "Inter UI","SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    height: 4rem;
+    padding: 0 1.6rem;
+    text-align: center;
+    text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
+    transition: all .5s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+
+  .button-36:hover {
+    box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
+    transition-duration: .1s;
+  }
+
+  @media (min-width: 768px) {
+    .button-36 {
+      padding: 0 2.6rem;
+    }
+  }
+
+  </style>
+</head>
+<body>
+
+<main>
+  <button onclick="location.href = '/web-vitals-optimization/'">返回首页</button>
+  <h1>
+    这是一个有关于 CLS 的体验演示
+  </h1>
+
+  <section id="trap" style="display: none">
+    <button class="button-36" role="button" id="download-baidu">
+      点击查看更多性能优化资料<br>
+      <span style="font-size: 12px;color: #9d9d9d">（在百度App中搜索）</span>
+    </button>
+  </section>
+
+  <section>
+    <button class="button-82-pushable" role="button" id="view-more">
+      <span class="button-82-shadow"></span>
+      <span class="button-82-edge"></span>
+      <span class="button-82-front text">
+        点击查看更多性能优化资料
+      </span>
+    </button>
+  </section>
+</main>
+
+<script>
+
+setTimeout(() => {
+  document.getElementById('trap').style.display = 'block'
+}, 1000)
+
+document.getElementById('download-baidu').addEventListener('click', () => {
+  window.open('https://mo.baidu.com/mo/home')
+})
+
+document.getElementById('view-more').addEventListener('click', () => {
+  window.open('https://web.dev/fast/')
+})
+</script>
+<script src="../web-vitals-widget.js" async defer></script>
+</body>
+</html>

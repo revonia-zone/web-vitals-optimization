@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title></title>
+  <style>
+  #images {
+    display: flex;
+    flex-direction: column;
+  }
+  #images img {
+    width: 100%;
+    display: block;
+    margin-bottom: 32px;
+    height: 400px;
+    object-fit: contain;
+  }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+  </style>
+</head>
+<body>
+<p>
+  这是使用 js 控制的懒加载（相关逻辑往往在是外联 js 中，这里外联 js 模拟延迟 2 秒），向下滑动查看更多
+</p>
+<div id="images">
+  <img class="lazy" data-src="../assets/michael-sum-LEpfefQf4rU-unsplash.jpg">
+  <img class="lazy" data-src="../assets/nadi-whatisdelirium-fZ8uf_L52wg-unsplash.jpg">
+  <img class="lazy" data-src="../assets/nadezhda-nikolaenko-UONij8U_oVc-unsplash.jpg">
+  <img class="lazy" data-src="../assets/remi-remino-E9kVmtiqqGE-unsplash.jpg">
+  <img class="lazy" data-src="../assets/loan-7AIDE8PrvA0-unsplash.jpg">
+  <img class="lazy" data-src="../assets/kabo-sR0cTmQHPug-unsplash.jpg">
+  <img class="lazy" data-src="../assets/timo-volz-ZlFKIG6dApg-unsplash.jpg">
+  <img class="lazy" data-src="../assets/eric-han-Hd7vwFzZpH0-unsplash.jpg">
+  <img class="lazy" data-src="../assets/bogdan-farca-CEx86maLUSc-unsplash.jpg">
+  <img class="lazy" data-src="../assets/zoe-gayah-jonker-13ky5Ycf0ts-unsplash.jpg">
+  <img class="lazy" data-src="../assets/milada-vigerova-7E9qvMOsZEM-unsplash.jpg">
+  <img class="lazy" data-src="../assets/manja-vitolic-gKXKBY-C-Dk-unsplash.jpg">
+</div>
+
+<script src="lazyload.js?sleep=2000"></script>
+<script src="../web-vitals-widget.js" async defer></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Title</title>
+  <style>
+  html, body, main {
+    height: 100%;
+    margin: 0;
+  }
+  header {
+    height: 40px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 40px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 16px;
+  }
+
+  img, .img-placeholder {
+    width: 100px;
+    height: 100px;
+    background-color: #eee;
+    display: inline-block;
+  }
+
+  #pic {
+    text-align: center;
+  }
+
+  #desc {
+    padding: 0 16px;
+  }
+
+  .desc-placeholder {
+    width: 100%;
+    height: 16px;
+    background-color: #eee;
+    margin-bottom: 2px;
+  }
+  </style>
+</head>
+<body>
+<main>
+  <header id="header"></header>
+  <section id="pic">
+    <div class="img-placeholder"></div>
+  </section>
+  <section id="desc">
+    <p>
+      <div class="desc-placeholder"></div>
+      <div class="desc-placeholder"></div>
+    </p>
+  </section>
+</main>
+
+<script>
+const type = new URL(location.href).searchParams.get('type')
+
+const header = document.getElementById('header')
+const pic = document.getElementById('pic')
+const desc = document.getElementById('desc')
+switch (type) {
+  case 'skeleton': {
+
+    break
+  }
+  case 'header': {
+    header.innerText = '查看图片'
+
+    break
+  }
+  case 'text': {
+    header.innerText = '查看图片'
+    desc.innerHTML = '<p>这是一张搞笑的可爱猫图，希望能给你的生活带来一点快乐</p>'
+    break
+  }
+}
+
+setTimeout(() => {
+  header.innerText = '查看图片'
+  pic.innerHTML = '<img src="../assets/cat-01.jpg" alt="cat">'
+  desc.innerHTML = '<p>这是一张搞笑的可爱猫图，希望能给你的生活带来一点快乐</p>'
+
+  const widget = document.createElement('script')
+  widget.src = "../web-vitals-widget.js"
+  document.body.appendChild(widget)
+}, 4000)
+</script>
+</body>
+</html>

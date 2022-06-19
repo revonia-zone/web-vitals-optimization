@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title></title>
+  <style>
+  #btn {
+    font-size: 16px;
+  }
+  #list {
+    font-size: 12px;
+    height: 80vh;
+    overflow: auto;
+    border: 1px solid #eee;
+  }
+  #list li {
+    margin-bottom: 10px;
+  }
+  .info {
+    color: blue;
+  }
+  </style>
+</head>
+<body>
+<main>
+  <div style="text-align: center">
+    <button id="btn">使用 SWR 策略请求慢接口 <br> maxAge: 10s, swr: 30s</button>
+    <div id="status">没有请求</div>
+  </div>
+  <ol id="list"></ol>
+</main>
+<script>
+
+const status = document.getElementById('status')
+let list = []
+
+let cache = {
+  at: 0,
+  maxAge: 10 * 1000,
+  swr: 30 * 1000,
+  data: null,
+}
+
+let backgroundPromise = null
+
+async function swrFetch() {
+  const now = Date.now()
+
+  async function fetchSlowApi() {
+    status.innerText = '正在请求中'
+    status.style.color = 'green'
+    const resp = await fetch('/web-vitals-optimization/api/slow')
+    cache.data = await resp.json()
+    status.innerText = '没有请求'
+    status.style.color = 'black'
+    cache.at = now
+    return cache.data
+  }
+
+  function refresh(background = false) {
+    if (background) {
+      if (backgroundPromise) {
+        // skip
+      } else {
+        backgroundPromise = fetchSlowApi().then(() => {
+          backgroundPromise = null
+        })
+      }
+    } else {
+      return fetchSlowApi()
+    }
+  }
+
+  if (now - cache.at < cache.maxAge) {
+    return {
+      time: new Date(),
+      data: JSON.stringify(cache.data),
+      info: '缓存还是新鲜的，直接使用缓存数据'
+    }
+  } else if (now - cache.at < cache.swr) {
+    refresh(true)
+    return {
+      time: new Date(),
+      data: JSON.stringify(cache.data),
+      info: '缓存是陈旧的，继续缓存数据，并在后台刷新数据'
+    }
+  } else {
+    return {
+      time: new Date(),
+      data: JSON.stringify(await refresh()),
+      info: '没有缓存，全新请求'
+    }
+  }
+}
+
+document.getElementById('btn').addEventListener('click', async () => {
+  list.push({
+    time: new Date(),
+    data: null,
+    info: '请求中......'
+  })
+  render()
+  const id = list.length - 1
+  list[id] = await swrFetch()
+  render()
+})
+
+const listEl = document.getElementById('list')
+function render() {
+  listEl.innerHTML = list.map((item) => {
+    const d = item.time
+    const t = `${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`
+    return `<li><div class="info">[${t}]${item.info}</div><div>${item.data || ''}</div></li>`
+  }).join('')
+
+  listEl.scrollTo({
+    behavior: 'smooth',
+    top: listEl.scrollHeight,
+  })
+}
+</script>
+<script src="../web-vitals-widget.js" async defer></script>
+</body>
+</html>

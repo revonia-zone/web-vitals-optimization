@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title></title>
+  <style>
+  html, body, main {
+    height: 100%;
+    margin: 0;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  iframe {
+    flex-grow: 1;
+  }
+  </style>
+</head>
+<body>
+<main>
+  <button onclick="location.href = '/web-vitals-optimization/'">返回首页</button>
+  <iframe src="timing.html?sleep=1000"></iframe>
+  <p>
+    这个页面使用了外联 css 与字体，并设置了 font-display: block，请稍等一会底部工具加载。查看计时会发现，外联 css 延长了 FCP，字体延长了 LCP
+  </p>
+</main>
+</body>
+</html>
