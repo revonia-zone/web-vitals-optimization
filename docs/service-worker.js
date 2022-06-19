@@ -62,7 +62,6 @@ const addResourcesToCache = async (resources) => {
 };
 
 const putInCache = async (request, response) => {
-  return
   const cache = await caches.open('v1');
   await cache.put(request, response);
 };

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Title</title>
+  <title>如何做性能优化</title>
   <style>
   .chapters {
     font-size: 18px;
@@ -17,6 +17,9 @@
 <body>
 
 <h1>如何做性能优化</h1>
+<div id="status">
+  Service Worker 正在加载中，请稍后
+</div>
 <ol class="chapters">
   <li>
     <a href="pages/01-showing.html">三种首屏内容</a>
@@ -57,7 +60,9 @@
   }
   const sw = await navigator.serviceWorker.register('/web-vitals-optimization/service-worker.js', { scope: '/web-vitals-optimization/' })
 
+  document.getElementById('status').innerText = 'Service Worker 加载完毕，可以继续浏览了'
   document.getElementById('refresh').addEventListener('click', () => {
+    sw.addEventListener('install')
     sw.active.postMessage({type: 'refresh'})
   })
 })()
